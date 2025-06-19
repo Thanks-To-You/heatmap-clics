@@ -1,0 +1,43 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa de Calor de Clics</title>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <!-- Carga la API de Google Maps con librería de visualización -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRaOBEyQPjKk8EPz7wUbjEvM8PNQjAeLw&libraries=visualization"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="heatmap_data.js"></script>
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 4.570868, lng: -74.297333 },
+          // Zoom bajo para ver todo el país
+          zoom: 7,
+          mapTypeId: "roadmap",
+        });
+
+        const heatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatmapData,
+          radius: 30,
+        });
+
+        heatmap.setMap(map);
+      }
+
+      window.onload = initMap;
+    </script>
+  </body>
+</html>
